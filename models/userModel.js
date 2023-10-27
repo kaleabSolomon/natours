@@ -20,7 +20,13 @@ const userSchema = new mongoose.Schema({
   },
   passwordConfirm: {
     type: String,
-    required: [true, 'password is mandatory']
+    required: [true, 'password is mandatory'],
+    // only works on create and save
+    validate: {
+      validator: function(el) {
+        return el === this.password;
+      }
+    }
   }
 });
 
