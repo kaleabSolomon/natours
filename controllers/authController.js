@@ -57,6 +57,10 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = await req.headers.authorization.split(' ')[1];
   }
   console.log(token);
+
+  if (!token) {
+    return next(new AppError('you are not logged in', 401));
+  }
   // validating the token
   // check if user still exists
   // check if the user changed password after the token was issued
