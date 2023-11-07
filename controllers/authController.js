@@ -170,4 +170,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
     return next(new AppError('incorrect password', 401));
   }
   // if so update the password
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  await User.save();
 });
