@@ -173,4 +173,10 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.password = req.body.password;
   user.passwordConfirm = req.body.passwordConfirm;
   await User.save();
+  // log the user in
+  const token = signToken(user._id);
+  res.status(200).json({
+    status: 'success',
+    token
+  });
 });
